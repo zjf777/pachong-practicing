@@ -1,0 +1,18 @@
+#@Author:saviour_zjf
+#@Date:2019/2/10 13:35
+#@Name: practice how to use requests + BeautifulSoup
+
+from bs4 import BeautifulSoup  #从bs4中导入BeautifulSoup库
+
+import requests
+
+headers  = {'User-Agent':"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"}
+
+r = requests.get('https://www.qiushibaike.com/article',
+                 headers = headers
+                )
+r.encoding = 'utf-8' #定义编码类型
+r.soup = BeautifulSoup(r.text,"html.parser")
+r.url = r.soup.find_all('div',attrs = {"class":"content"}) #用find_all找到含有目标信息的所有标签
+print(r.url)
+print(len(r.url))
